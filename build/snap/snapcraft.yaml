@@ -133,6 +133,10 @@ parts:
       - libqt5sensors5
       - libqt5webchannel5
       - libqt5webkit5
+      # QtSvg's iconengines/libqsvgicon.so + imageformats/libqsvg.so - all of the
+      # app's menu/toolbar icons are .svg resources (see app/mf-resources.qrc), so
+      # without this they silently render blank instead of showing an error
+      - libqt5svg5
       - libhunspell-1.7-0
       - libvoikko1
       - libcurl3t64-gnutls
@@ -150,6 +154,11 @@ parts:
       - libxcb-xinerama0
       - libxcb-xkb1
       - libxkbcommon-x11-0
+      # Qt wayland platform plugin (platforms/libqwayland-*.so) - the app already
+      # plugs 'wayland' below, but without this package the plugin binary itself is
+      # missing, so 'snap run' on a Wayland session logs "Could not find the Qt
+      # platform plugin wayland" and silently falls back to XWayland/xcb instead
+      - qtwayland5
 
   launcher:
     # stages the first-run default-content seeding wrapper as bin/mindforger-launcher,
