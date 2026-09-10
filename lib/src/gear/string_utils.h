@@ -188,6 +188,27 @@ static inline std::string stringIntFormat(std::string value, char thousandSep = 
 
 void replaceAll(const std::string& old_s, const std::string& new_s, std::string& s);
 
+/**
+ * @brief Is line a blank line or a Markdown block-level construct (heading, list
+ * item, blockquote, code fence, indented code, table row, horizontal rule)?
+ *
+ * Used to delimit a plain prose paragraph for rewrap/fill-paragraph (Edit/Rewrap
+ * Paragraph): such lines are boundaries - they are never merged into, or split out
+ * of, a rewrapped paragraph.
+ */
+bool isMarkdownParagraphBoundaryLine(const std::string& line);
+
+/**
+ * @brief Rewrap ("fill") a Markdown paragraph to the given column width - the Emacs
+ * fill-paragraph / VS Code Rewrap equivalent.
+ *
+ * @param lines a single plain prose paragraph i.e. lines with none of them matching
+ *              isMarkdownParagraphBoundaryLine()
+ * @param width target column width - a single word longer than width is kept whole
+ *              on its own line rather than being broken
+ */
+std::vector<std::string> rewrapParagraphLines(const std::vector<std::string>& lines, unsigned width = 80);
+
 } /* namespace*/
 
 #endif /* M8R_STRING_UTILS_H_ */

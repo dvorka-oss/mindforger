@@ -2,6 +2,8 @@
 
     * Released v2.2.0 - ...
     * Build: simplified version handling - lib/src/app_info.h as authoritative source.
+    * Feature: Edit/Rewrap Paragraph - fills/rewraps the  paragraph under the cursor
+      to 80 columns.
 
 2026-09-02  Martin Dvorak  <martin.dvorak@mindforger.com>
 
