@@ -262,6 +262,7 @@ HEADERS += \
     ./src/qt/dialogs/find_outline_by_name_dialog.h \
     ./src/qt/dialogs/find_note_by_name_dialog.h \
     ./src/qt/dialogs/note_edit_dialog.h \
+    ./src/qt/dialogs/emojis_dialog.h \
     ./src/qt/dialogs/configuration_dialog.h \
     ./src/qt/widgets/edit_tags_panel.h \
     ./src/qt/widgets/labeled_edit_line_panel.h \
@@ -387,6 +388,7 @@ SOURCES += \
     ./src/qt/dialogs/find_outline_by_name_dialog.cpp \
     ./src/qt/dialogs/find_note_by_name_dialog.cpp \
     ./src/qt/dialogs/note_edit_dialog.cpp \
+    ./src/qt/dialogs/emojis_dialog.cpp \
     ./src/qt/dialogs/configuration_dialog.cpp \
     ./src/qt/widgets/edit_tags_panel.cpp \
     ./src/qt/widgets/labeled_edit_line_panel.cpp \

@@ -4,6 +4,8 @@
     * Build: simplified version handling - lib/src/app_info.h as authoritative source.
     * Feature: Edit/Rewrap Paragraph - fills/rewraps the paragraph under the cursor
       to 80 columns.
+    * Enhancement: add emojis by clicking associated button when adding new 
+      Notebook/Note or editing Notebook/Note name or description.
     * Fix: strict Snap shipped with no menu/toolbar icons.
     * Fix: colors of autolinking generated Note/Outline interlinks are in blue.
     * Fix: bare http(s):// URLs containing Markdown-special characters (e.g. '_')
