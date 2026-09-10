@@ -107,12 +107,6 @@ public:
     void wrapSelectedText(const QString &tag, const QString &endTag);
     void removeSelectedText() { textCursor().removeSelectedText(); }
     void insertMarkdownText(const QString &text, bool newLine=true, int offset=0);
-    /**
-     * @brief Rewrap ("fill") the plain prose paragraph under the cursor to a fixed
-     * column width - Emacs fill-paragraph / VS Code Rewrap equivalent. No-op if the
-     * cursor is on a blank line or a block-level Markdown line (heading, list item,
-     * blockquote, code, table, ...) - see isMarkdownParagraphBoundaryLine().
-     */
     void rewrapParagraph();
 
     // drag & drop

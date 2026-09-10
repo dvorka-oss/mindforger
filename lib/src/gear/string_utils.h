@@ -191,10 +191,6 @@ void replaceAll(const std::string& old_s, const std::string& new_s, std::string&
 /**
  * @brief Is line a blank line or a Markdown block-level construct (heading, list
  * item, blockquote, code fence, indented code, table row, horizontal rule)?
- *
- * Used to delimit a plain prose paragraph for rewrap/fill-paragraph (Edit/Rewrap
- * Paragraph): such lines are boundaries - they are never merged into, or split out
- * of, a rewrapped paragraph.
  */
 bool isMarkdownParagraphBoundaryLine(const std::string& line);
 
