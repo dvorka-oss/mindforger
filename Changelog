@@ -2,6 +2,7 @@
 
     * Released v2.2.0 - ...
     * Build: simplified version handling - lib/src/app_info.h as authoritative source.
+    * Fix: strict Snap shipped with no menu/toolbar icons.
 
 2026-09-02  Martin Dvorak  <martin.dvorak@mindforger.com>
 
