@@ -364,6 +364,7 @@ public slots:
     void doActionEditFind();
     void doActionEditFindAgain();
     void doActionEditWordWrapToggle();
+    void doActionEditRewrapParagraph();
     void doActionEditPasteImageData(QImage image);
     void doActionRunToolDialogAnywhere();
     void doActionOpenRunToolDialog(QString& phrase, QString& toolId, bool showDialog=true);

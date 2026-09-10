@@ -3312,6 +3312,20 @@ void MainWindowPresenter::doActionEditWordWrapToggle()
     }
 }
 
+void MainWindowPresenter::doActionEditRewrapParagraph()
+{
+    NoteEditorView* editor{};
+    if(orloj->isFacetActive(OrlojPresenterFacets::FACET_EDIT_NOTE)) {
+        editor = orloj->getNoteEdit()->getView()->getNoteEditor();
+    } else if(orloj->isFacetActive(OrlojPresenterFacets::FACET_EDIT_OUTLINE_HEADER)) {
+        editor = orloj->getOutlineHeaderEdit()->getView()->getHeaderEditor();
+    } else {
+        return;
+    }
+
+    editor->rewrapParagraph();
+}
+
 void MainWindowPresenter::doActionMindRemember()
 {
     mdConfigRepresentation->save(config);

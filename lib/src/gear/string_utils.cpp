@@ -19,6 +19,8 @@
 #include "string_utils.h"
 
 #include <cassert>
+#include <regex>
+#include <sstream>
 
 using namespace std;
 
@@ -190,6 +192,84 @@ void replaceAll(const std::string& old_s, const std::string& new_s, std::string&
              s.replace(from, old_s.length(), new_s);
              from += new_s.length();
     }
+}
+
+bool isMarkdownParagraphBoundaryLine(const string& line)
+{
+    // indented code block: 4+ leading spaces or a leading TAB - checked on the RAW,
+    // untrimmed line as trimming would hide the indentation which makes it code
+    if(stringStartsWith(line, "\t")) {
+        return true;
+    }
+    size_t leadingSpaces{0};
+    while(leadingSpaces<line.size() && line[leadingSpaces]==' ') {
+        leadingSpaces++;
+    }
+    if(leadingSpaces>=4) {
+        return true;
+    }
+
+    string trimmed{line};
+    stringTrim(trimmed);
+
+    if(trimmed.empty()) {
+        return true;
+    }
+
+    static const regex heading{R"(^#{1,6}(\s|$))"};
+    static const regex blockquote{R"(^>)"};
+    static const regex codeFence{R"(^(```|~~~))"};
+    static const regex bulletList{R"(^[-*]\s+\S)"};
+    static const regex numberedList{R"(^\d+\.\s+\S)"};
+    static const regex horizontalRule{R"(^(-{3,}|\*{3,}|_{3,})\s*$)"};
+
+    if(regex_search(trimmed, heading)
+       || regex_search(trimmed, blockquote)
+       || regex_search(trimmed, codeFence)
+       || regex_search(trimmed, bulletList)
+       || regex_search(trimmed, numberedList)
+       || regex_search(trimmed, horizontalRule)
+    ) {
+        return true;
+    }
+
+    // table row - heuristic: any pipe character on the line
+    if(trimmed.find('|')!=string::npos) {
+        return true;
+    }
+
+    return false;
+}
+
+vector<string> rewrapParagraphLines(const vector<string>& lines, unsigned width)
+{
+    vector<string> words{};
+    for(const string& line: lines) {
+        istringstream iss{line};
+        string word{};
+        while(iss >> word) {
+            words.push_back(word);
+        }
+    }
+
+    vector<string> result{};
+    string currentLine{};
+    for(const string& word: words) {
+        if(currentLine.empty()) {
+            currentLine = word;
+        } else if(currentLine.size()+1+word.size()<=width) {
+            currentLine += ' ';
+            currentLine += word;
+        } else {
+            result.push_back(currentLine);
+            currentLine = word;
+        }
+    }
+    if(!currentLine.empty()) {
+        result.push_back(currentLine);
+    }
+
+    return result;
 }
 
 } /* namespace */
